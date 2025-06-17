@@ -426,13 +426,13 @@ document.write(`
 <div class="cell_output docutils container">
 <div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
 <span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">2</span>
+<span class="n">Cell</span> <span class="n">In</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">line</span> <span class="mi">3</span>
 <span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="c1"># Import packages</span>
-<span class="ne">----&gt; </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="kn">import</span><span class="w"> </span><span class="nn">plotly.express</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">px</span>
 <span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="kn">import</span><span class="w"> </span><span class="nn">seaborn</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">sns</span>
 
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;pandas&#39;
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;plotly&#39;
 </pre></div>
 </div>
 </div>
@@ -443,7 +443,7 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Load the Iris flower dataset using pandas</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;iris_data.csv&quot;</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;merged_weather_all_crime.csv&quot;</span><span class="p">)</span>
 <span class="n">df</span>
 </pre></div>
 </div>
@@ -467,59 +467,149 @@ document.write(`
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>sepal_length</th>
-      <th>sepal_width</th>
-      <th>petal_length</th>
-      <th>petal_width</th>
-      <th>species</th>
-      <th>species_id</th>
+      <th>month</th>
+      <th>STN</th>
+      <th>DDVEC</th>
+      <th>FHVEC</th>
+      <th>FG</th>
+      <th>FHX</th>
+      <th>FHXH</th>
+      <th>FHN</th>
+      <th>FHNH</th>
+      <th>FXX</th>
+      <th>...</th>
+      <th>3.5.5 Weg (overig)</th>
+      <th>3.6.4 Aantasting openbare orde</th>
+      <th>3.7.1 Discriminatie</th>
+      <th>3.7.2 Vreemdelingenzorg</th>
+      <th>3.7.3 Maatsch. integriteit (overig)</th>
+      <th>3.7.4 Cybercrime</th>
+      <th>3.9.1 Horizontale fraude</th>
+      <th>3.9.2 Verticale fraude</th>
+      <th>3.9.3 Fraude (overig)</th>
+      <th>Totaal misdrijven</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
-      <td>5.1</td>
-      <td>3.5</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-      <td>1</td>
+      <td>2012-01</td>
+      <td>240.0</td>
+      <td>217.580645</td>
+      <td>58.709677</td>
+      <td>63.387097</td>
+      <td>89.032258</td>
+      <td>11.258065</td>
+      <td>36.451613</td>
+      <td>10.354839</td>
+      <td>136.129032</td>
+      <td>...</td>
+      <td>48.0</td>
+      <td>90.0</td>
+      <td>4.0</td>
+      <td>21.0</td>
+      <td>0.0</td>
+      <td>3.0</td>
+      <td>108.0</td>
+      <td>7.0</td>
+      <td>211.0</td>
+      <td>8466.0</td>
     </tr>
     <tr>
       <th>1</th>
-      <td>4.9</td>
+      <td>2012-02</td>
+      <td>240.0</td>
+      <td>194.551724</td>
+      <td>48.482759</td>
+      <td>51.448276</td>
+      <td>75.517241</td>
+      <td>11.655172</td>
+      <td>25.862069</td>
+      <td>11.965517</td>
+      <td>114.827586</td>
+      <td>...</td>
+      <td>29.0</td>
+      <td>78.0</td>
+      <td>4.0</td>
+      <td>12.0</td>
+      <td>0.0</td>
+      <td>7.0</td>
+      <td>118.0</td>
       <td>3.0</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-      <td>1</td>
+      <td>236.0</td>
+      <td>7374.0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>4.7</td>
-      <td>3.2</td>
-      <td>1.3</td>
-      <td>0.2</td>
-      <td>setosa</td>
-      <td>1</td>
+      <td>2012-03</td>
+      <td>240.0</td>
+      <td>209.096774</td>
+      <td>33.709677</td>
+      <td>39.064516</td>
+      <td>60.645161</td>
+      <td>11.483871</td>
+      <td>18.709677</td>
+      <td>7.838710</td>
+      <td>92.903226</td>
+      <td>...</td>
+      <td>31.0</td>
+      <td>116.0</td>
+      <td>4.0</td>
+      <td>14.0</td>
+      <td>0.0</td>
+      <td>16.0</td>
+      <td>147.0</td>
+      <td>9.0</td>
+      <td>272.0</td>
+      <td>8645.0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>4.6</td>
-      <td>3.1</td>
-      <td>1.5</td>
-      <td>0.2</td>
-      <td>setosa</td>
-      <td>1</td>
+      <td>2012-04</td>
+      <td>240.0</td>
+      <td>190.233333</td>
+      <td>44.700000</td>
+      <td>50.700000</td>
+      <td>80.333333</td>
+      <td>11.833333</td>
+      <td>22.333333</td>
+      <td>7.866667</td>
+      <td>125.666667</td>
+      <td>...</td>
+      <td>27.0</td>
+      <td>102.0</td>
+      <td>3.0</td>
+      <td>21.0</td>
+      <td>0.0</td>
+      <td>10.0</td>
+      <td>155.0</td>
+      <td>6.0</td>
+      <td>230.0</td>
+      <td>8143.0</td>
     </tr>
     <tr>
       <th>4</th>
-      <td>5.0</td>
-      <td>3.6</td>
-      <td>1.4</td>
-      <td>0.2</td>
-      <td>setosa</td>
-      <td>1</td>
+      <td>2012-05</td>
+      <td>240.0</td>
+      <td>181.548387</td>
+      <td>37.258065</td>
+      <td>44.193548</td>
+      <td>68.064516</td>
+      <td>12.935484</td>
+      <td>18.709677</td>
+      <td>9.000000</td>
+      <td>110.322581</td>
+      <td>...</td>
+      <td>28.0</td>
+      <td>101.0</td>
+      <td>6.0</td>
+      <td>20.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>136.0</td>
+      <td>6.0</td>
+      <td>256.0</td>
+      <td>8333.0</td>
     </tr>
     <tr>
       <th>...</th>
@@ -529,55 +619,145 @@ document.write(`
       <td>...</td>
       <td>...</td>
       <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
     </tr>
     <tr>
-      <th>145</th>
-      <td>6.7</td>
-      <td>3.0</td>
-      <td>5.2</td>
-      <td>2.3</td>
-      <td>virginica</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>146</th>
-      <td>6.3</td>
-      <td>2.5</td>
+      <th>155</th>
+      <td>2024-12</td>
+      <td>240.0</td>
+      <td>197.096774</td>
+      <td>53.322581</td>
+      <td>58.451613</td>
+      <td>79.354839</td>
+      <td>12.000000</td>
+      <td>34.193548</td>
+      <td>8.870968</td>
+      <td>128.387097</td>
+      <td>...</td>
+      <td>72.0</td>
+      <td>107.0</td>
+      <td>8.0</td>
       <td>5.0</td>
-      <td>1.9</td>
-      <td>virginica</td>
-      <td>3</td>
-    </tr>
-    <tr>
-      <th>147</th>
-      <td>6.5</td>
-      <td>3.0</td>
-      <td>5.2</td>
+      <td>0.0</td>
+      <td>30.0</td>
+      <td>451.0</td>
+      <td>1.0</td>
       <td>2.0</td>
-      <td>virginica</td>
-      <td>3</td>
+      <td>6871.0</td>
     </tr>
     <tr>
-      <th>148</th>
-      <td>6.2</td>
-      <td>3.4</td>
-      <td>5.4</td>
-      <td>2.3</td>
-      <td>virginica</td>
-      <td>3</td>
+      <th>156</th>
+      <td>2025-01</td>
+      <td>240.0</td>
+      <td>219.774194</td>
+      <td>41.129032</td>
+      <td>46.645161</td>
+      <td>74.516129</td>
+      <td>11.483871</td>
+      <td>20.645161</td>
+      <td>11.161290</td>
+      <td>117.096774</td>
+      <td>...</td>
+      <td>78.0</td>
+      <td>126.0</td>
+      <td>5.0</td>
+      <td>4.0</td>
+      <td>0.0</td>
+      <td>52.0</td>
+      <td>457.0</td>
+      <td>2.0</td>
+      <td>5.0</td>
+      <td>6021.0</td>
     </tr>
     <tr>
-      <th>149</th>
-      <td>5.9</td>
+      <th>157</th>
+      <td>2025-02</td>
+      <td>240.0</td>
+      <td>130.678571</td>
+      <td>40.464286</td>
+      <td>44.178571</td>
+      <td>62.857143</td>
+      <td>8.571429</td>
+      <td>23.928571</td>
+      <td>9.535714</td>
+      <td>100.357143</td>
+      <td>...</td>
+      <td>82.0</td>
+      <td>119.0</td>
+      <td>7.0</td>
+      <td>10.0</td>
+      <td>0.0</td>
+      <td>34.0</td>
+      <td>438.0</td>
       <td>3.0</td>
-      <td>5.1</td>
-      <td>1.8</td>
-      <td>virginica</td>
-      <td>3</td>
+      <td>2.0</td>
+      <td>5824.0</td>
+    </tr>
+    <tr>
+      <th>158</th>
+      <td>2025-03</td>
+      <td>240.0</td>
+      <td>159.193548</td>
+      <td>31.516129</td>
+      <td>36.516129</td>
+      <td>57.419355</td>
+      <td>11.935484</td>
+      <td>16.451613</td>
+      <td>9.580645</td>
+      <td>88.709677</td>
+      <td>...</td>
+      <td>100.0</td>
+      <td>123.0</td>
+      <td>4.0</td>
+      <td>8.0</td>
+      <td>0.0</td>
+      <td>38.0</td>
+      <td>442.0</td>
+      <td>1.0</td>
+      <td>6.0</td>
+      <td>6232.0</td>
+    </tr>
+    <tr>
+      <th>159</th>
+      <td>2025-04</td>
+      <td>240.0</td>
+      <td>121.633333</td>
+      <td>33.766667</td>
+      <td>38.733333</td>
+      <td>58.333333</td>
+      <td>13.400000</td>
+      <td>17.000000</td>
+      <td>7.533333</td>
+      <td>96.000000</td>
+      <td>...</td>
+      <td>59.0</td>
+      <td>167.0</td>
+      <td>6.0</td>
+      <td>5.0</td>
+      <td>0.0</td>
+      <td>32.0</td>
+      <td>448.0</td>
+      <td>0.0</td>
+      <td>4.0</td>
+      <td>6794.0</td>
     </tr>
   </tbody>
 </table>
-<p>150 rows × 6 columns</p>
+<p>160 rows × 90 columns</p>
 </div></div></div>
 </div>
 </section>
@@ -587,17 +767,17 @@ document.write(`
 For more information, check <a class="reference external" href="https://jupyterbook.org/en/stable/interactive/interactive.html">this documentation</a>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Iris dataset using Plotly</span>
-<span class="n">g1</span> <span class="o">=</span> <span class="n">px</span><span class="o">.</span><span class="n">scatter_3d</span><span class="p">(</span><span class="n">df</span><span class="p">,</span>
-                   <span class="n">x</span><span class="o">=</span><span class="s2">&quot;sepal_width&quot;</span><span class="p">,</span>
-                   <span class="n">y</span><span class="o">=</span><span class="s2">&quot;sepal_length&quot;</span><span class="p">,</span>
-                   <span class="n">z</span><span class="o">=</span><span class="s2">&quot;petal_width&quot;</span><span class="p">,</span>
-                   <span class="n">color</span><span class="o">=</span><span class="s2">&quot;species&quot;</span><span class="p">,</span>
-                   <span class="n">size</span><span class="o">=</span><span class="s2">&quot;petal_length&quot;</span><span class="p">,</span>
-                   <span class="n">opacity</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span>
-                   <span class="n">size_max</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span>
-                   <span class="n">height</span><span class="o">=</span><span class="mi">700</span><span class="p">)</span>
-<span class="n">g1</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># # Plot the Iris dataset using Plotly</span>
+<span class="c1"># g1 = px.scatter_3d(df,</span>
+<span class="c1">#                    x=&quot;sepal_width&quot;,</span>
+<span class="c1">#                    y=&quot;sepal_length&quot;,</span>
+<span class="c1">#                    z=&quot;petal_width&quot;,</span>
+<span class="c1">#                    color=&quot;species&quot;,</span>
+<span class="c1">#                    size=&quot;petal_length&quot;,</span>
+<span class="c1">#                    opacity=0.6,</span>
+<span class="c1">#                    size_max=30,</span>
+<span class="c1">#                    height=700)</span>
+<span class="c1"># g1</span>
 </pre></div>
 </div>
 </div>
@@ -632,9 +812,9 @@ if (outputEl) {{
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Plot the Iris dataset using seaborn</span>
-<span class="n">g2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">pairplot</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;species_id&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span>
-                  <span class="n">hue</span><span class="o">=</span><span class="s1">&#39;species&#39;</span><span class="p">)</span>
-<span class="n">g2</span>
+<span class="c1"># g2 = sns.pairplot(df.drop(&quot;species_id&quot;, axis=1),</span>
+<span class="c1">#                   hue=&#39;species&#39;)</span>
+<span class="c1"># g2</span>
 </pre></div>
 </div>
 </div>
