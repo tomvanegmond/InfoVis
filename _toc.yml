@@ -6,4 +6,6 @@ root: docs/introduction
 chapters:
 - file: docs/datasets
 - file: docs/notebook
+- file: docs/reflection
+- file: docs/distribution
 
