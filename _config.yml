@@ -10,8 +10,8 @@ execute:
   execute_notebooks: force
 
 
-notebook:
-  exclude_input: true
+# notebook:
+#   exclude_input: true
 # Define the name of the latex output file for PDF builds
 latex:
   latex_documents:
