@@ -385,7 +385,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -401,6 +403,16 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,13 +424,42 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="datasets-and-preprocessing">
 <h1>Datasets and Preprocessing<a class="headerlink" href="#datasets-and-preprocessing" title="Link to this heading">#</a></h1>
-<p>In this research, we combine two publicly accessible data sources to create a table that contains, per month, both weather conditions and recorded crimes in the Netherlands. The weather conditions are originally measured per day, while the crimes are reported per month. To get both sources neatly into one file, so we can work with it properly, we performed a series of operations explained below.</p>
-<p>We make use of two reliable government sources. The first is the KNMI file with daily weather observations from station Schiphol (STN 240). This dataset contains all measurements from January 1, 2012, through April 30, 2025: in total 4,873 day‑rows and 48 columns. The dataset contains all standard weather measurements from KNMI. The variables include, for example: the minimum temperature at 10 cm height (T10N), the daily total of precipitation (RH), and the minimum visibility distance (VVN). Even though not every variable is directly needed for the final analysis, we include the complete set to avoid overlooking any potential correlations.</p>
-<p>The second source is the CBS table ‘Registered crimes; type of crime, district, neighborhood; monthly figures’. This contains monthly counts for sixty crime categories. We used the version that was available on June 10, 2025. This covers the period from January 2012 through April 2025. Both sources are managed by national Dutch institutions and are considered reliable.
-Although the datasets were already delivered very well by the institutions, it was still necessary to make some small adjustments for further processing. While cleaning the data, all column names were first stripped of unnecessary spaces so that variables such as T10N and RH would be correctly recognized. Then, in the KNMI file, all data columns were converted to numeric values. This prevents issues caused by missing measurements sometimes being stored as empty text fields, which can cause problems when calculating averages. In the CBS file, the dot (.) that indicates a suppressed observation was also replaced by numeric values.</p>
-<p>The KNMI and CBS datasets were not structured in the same way. One had the recorded time as rows and the other as columns. Because of this, we first had to adjust the CBS dataset to make merging easier.
-Since the CBS dataset gives monthly values per crime category and the KNMI provides daily measurements, we decided to take a monthly average for each weather variable. These averages give a general idea of a particular weather variable during that month, such as temperature or sunshine hours.</p>
-<p>After the two datasets were prepared, we could merge them. Only months that are present in both sources were retained. We were able to merge the two datasets using the date, which we formatted identically in both datasets. The end result consists of 160 rows and 102 columns, namely one key column (the date), 41 weather features, and 60 crime categories.</p>
+<section id="datasets">
+<h2>Datasets<a class="headerlink" href="#datasets" title="Link to this heading">#</a></h2>
+<p>For this research we wanted to find the correlation between crime and weather. Luckily these two categories are well documented, and the data was easy to find. We make use of two reliable government sources.
+The first is the KNMI file with daily weather observations from station Schiphol (STN 240). It is downloaded from: <a class="reference external" href="https://www.knmi.nl/nederland-nu/klimatologie/daggegevens">https://www.knmi.nl/nederland-nu/klimatologie/daggegevens</a>. This dataset contains all measurements from January 1, 2012, through April 30, 2025: in total 4,873 day‑rows and 48 columns. The dataset contains all standard weather measurements from KNMI. There are too many to go over, so here are the variables we used in our analysis. We give the name used in the dataset, followed by its meaning and the way we will refer to it from now on:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">TX</span></code> - <code class="docutils literal notranslate"><span class="pre">Maximum</span> <span class="pre">temperature</span></code> (in 0.1 °C)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SQ</span></code>- <code class="docutils literal notranslate"><span class="pre">Sunshine</span> <span class="pre">duration</span></code> (in hours)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">VVN</span></code> - <code class="docutils literal notranslate"><span class="pre">Minimum</span> <span class="pre">visibility</span></code> (in 100 meters)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">TG</span></code> - <code class="docutils literal notranslate"><span class="pre">Average</span> <span class="pre">temperature</span></code> (in 0.1 °C)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">DR</span></code> -<code class="docutils literal notranslate"><span class="pre">Precipitation</span></code> (in # of hours)</p></li>
+</ul>
+<p>The second source is the CBS table ‘Registered crimes; type of crime, district, neighborhood; monthly figures’. This dataset is downloaded from: <a class="reference external" href="https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83648NED/table?fromstatweb">https://opendata.cbs.nl/statline/#/CBS/nl/dataset/83648NED/table?fromstatweb</a>. This contains monthly counts for sixty crime categories. We used the version that was available on June 10, 2025. This covers the period from January 2012 through April 2025. The variables we used are:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">1.2.3</span> <span class="pre">Diefstal</span> <span class="pre">van</span> <span class="pre">brom-,</span> <span class="pre">snor-,</span> <span class="pre">fietsen</span></code> – <code class="docutils literal notranslate"><span class="pre">Bicycle</span> <span class="pre">theft</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3.4.2</span> <span class="pre">Onder</span> <span class="pre">invloed</span> <span class="pre">(water)</span></code> – <code class="docutils literal notranslate"><span class="pre">Under</span> <span class="pre">influence</span> <span class="pre">(water)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.1.1</span> <span class="pre">Diefstal/inbraak</span> <span class="pre">woning</span></code> – <code class="docutils literal notranslate"><span class="pre">Burglary/theft</span> <span class="pre">from</span> <span class="pre">home</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.3.1</span> <span class="pre">Ongevallen</span> <span class="pre">(weg)</span></code> – <code class="docutils literal notranslate"><span class="pre">Traffic</span> <span class="pre">accidents</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">2.5.2</span> <span class="pre">Winkeldiefstal</span></code> – <code class="docutils literal notranslate"><span class="pre">Shoplifting</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.2.4</span> <span class="pre">Zakkenrollerij</span></code> – <code class="docutils literal notranslate"><span class="pre">Pickpocketing</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.4.2</span> <span class="pre">Moord,</span> <span class="pre">doodslag</span></code> – <code class="docutils literal notranslate"><span class="pre">Murder,</span> <span class="pre">manslaughter</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.4.5</span> <span class="pre">Mishandeling</span></code> – <code class="docutils literal notranslate"><span class="pre">Abuse</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">3.7.4</span> <span class="pre">Cybercrime</span></code> – <code class="docutils literal notranslate"><span class="pre">Cybercrime</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">1.4.3</span> <span class="pre">Openlijk</span> <span class="pre">geweld</span> <span class="pre">(persoon)</span></code> – <code class="docutils literal notranslate"><span class="pre">Public</span> <span class="pre">violence</span></code></p></li>
+</ul>
+<p>Because the data consists of only continuous numeric values, we can explore linear relationships between weather variables and crime categories through Pearson’s correlation, as well as use scatterplots and regression models to visualize patterns.</p>
+</section>
+<section id="cleaning">
+<h2>Cleaning<a class="headerlink" href="#cleaning" title="Link to this heading">#</a></h2>
+<p>Although the datasets were already delivered very well by the institutions, it was still necessary to make some small adjustments for further processing and merging. While cleaning the data, all column names were first stripped of unnecessary spaces so that all variables would be recognized correctly. Then, in the KNMI file, all data columns were converted to numeric values. This prevents issues caused by missing measurements sometimes being stored as empty text fields, which can cause problems when calculating averages. In the CBS file, the dot (.) that indicates a suppressed observation was also replaced by the mean numeric value for that column.
+The KNMI and CBS datasets were not structured in the same way. One had the recorded time as rows and the other as columns. Because of this, we first had to adjust the CBS dataset to have the date as the first column instead of as row, to be able to merge them by date.</p>
+</section>
+<section id="aggregation">
+<h2>Aggregation<a class="headerlink" href="#aggregation" title="Link to this heading">#</a></h2>
+<p>Since the CBS dataset gives monthly values per crime category and the KNMI provides daily measurements, we decided to take a monthly average for each weather variable. These averages give a general idea of a particular weather variable during that month. We did this by simply taking the mean of each separate month for the weather data. This was possible because of the date codes in the dataset. This resulted in a dataset containing monthly average weather variables.
+After the two datasets were prepared, we could merge them. Only months that are present in both sources were retained. We were able to merge the two datasets using the date, which we formatted identically in both datasets. The end result consists of 160 rows and 102 columns, one key column (the date), 41 weather features, and 60 crime categories.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -475,6 +516,23 @@ Since the CBS dataset gives monthly values per crime category and the KNMI provi
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#datasets">Datasets</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#cleaning">Cleaning</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aggregation">Aggregation</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>

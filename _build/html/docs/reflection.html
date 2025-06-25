@@ -385,7 +385,9 @@ document.write(`
   </button>
 `);
 </script>
-
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
 </div></div>
       
     </div>
@@ -401,6 +403,15 @@ document.write(`
     <div id="print-main-content">
         <div id="jb-print-toc">
             
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ta-feedback">TA-feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-reflection">Self reflection</a></li>
+</ul>
+            </nav>
         </div>
     </div>
 </div>
@@ -412,7 +423,28 @@ document.write(`
                   
   <section class="tex2jax_ignore mathjax_ignore" id="reflection">
 <h1>Reflection<a class="headerlink" href="#reflection" title="Link to this heading">#</a></h1>
-<p>text</p>
+<section id="ta-feedback">
+<h2>TA-feedback<a class="headerlink" href="#ta-feedback" title="Link to this heading">#</a></h2>
+<p>During our feedback session with the TA we got various points of improvement. Underneath the suggestion we explain how we implemented it:</p>
+<ul class="simple">
+<li><p>Add more statistics to the “Bicycle Theft vs. Maximum Temperature” plot<br />
+→ Added the correlation coefficient and gradient.</p></li>
+<li><p>The use of both evaporation and temperature in the “Temperature, evaporation and water-influence reports over time” plot is redundant<br />
+→ Removed evaporation due to its strong correlation with temperature, replaced temperature with sunshine duration for more variety.</p></li>
+<li><p>The variables in the heatmap do not closely match the narrative<br />
+→ Adjusted the heatmap to include variables more relevant to our research question.</p></li>
+<li><p>Improve the readability of the plots<br />
+→ Applied larger fonts and clearer axis labels</p></li>
+<li><p>Use variable names instead of codes in the heatmap<br />
+→ Variables are now displayed with full, descriptive names.</p></li>
+<li><p>Use years instead of months in the “Temperature, evaporation and water-influence reports over time” plot, and remove lines indicating months<br />
+→ The x-axis now shows the months grouped by year</p></li>
+</ul>
+</section>
+<section id="self-reflection">
+<h2>Self reflection<a class="headerlink" href="#self-reflection" title="Link to this heading">#</a></h2>
+<p>During this project, we gained a better understanding of how visual design choices like colour schemes and layout can impact the clarity and effectiveness of the visualisations. We gradually improved these aspects by experimenting with different styles, which made our graphs more accessible and visually appealing.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -469,6 +501,22 @@ document.write(`
             </div>
             
             
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ta-feedback">TA-feedback</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#self-reflection">Self reflection</a></li>
+</ul>
+  </nav></div>
+
+</div></div>
               
             
           </div>
